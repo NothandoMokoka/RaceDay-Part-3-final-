@@ -1,0 +1,56 @@
+﻿@model RaceDayMVC.Models.OrganizerEventViewModel
+
+@{
+    ViewData["Title"] = "Delete Event";
+}
+
+<div class="container py-5">
+    <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-body p-4 p-md-5">
+
+            <div class="alert alert-warning">
+                Are you sure you want to permanently delete this event?
+                This action cannot be undone.
+            </div>
+
+            <h2 class="mb-4">Delete Event</h2>
+
+            @if (!string.IsNullOrEmpty(Model.BannerImageUrl))
+            {
+                <img src="@Model.BannerImageUrl"
+                     class="img-fluid rounded mb-4"
+                     style="max-height:250px; width:100%; object-fit:cover;"
+                     alt="Event banner" />
+            }
+
+            <h4>@Model.Name</h4>
+
+            <p>@Model.Description</p>
+
+            <p><strong>Date:</strong> @Model.EventDate.ToString("dd MMMM yyyy")</p>
+            <p><strong>Location:</strong> @Model.Location</p>
+            <p><strong>Distance:</strong> @Model.Distance km</p>
+            <p><strong>Event Type:</strong> @Model.EventType</p>
+
+            <hr />
+
+            <form asp-controller="Organizer"
+                  asp-action="DeleteEventConfirmed"
+                  method="post">
+
+                <input type="hidden" name="id" value="@Model.EventID" />
+
+                <button type="submit" class="btn btn-danger">
+                    Yes, Delete Event
+                </button>
+
+                <a asp-controller="Organizer"
+                   asp-action="Events"
+                   class="btn btn-outline-secondary ms-2">
+                    Cancel
+                </a>
+            </form>
+
+        </div>
+    </div>
+</div>

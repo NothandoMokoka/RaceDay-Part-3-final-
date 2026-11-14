@@ -1,0 +1,123 @@
+﻿@model List<RaceDayMVC.Models.ParticipantEventViewModel>
+
+@{
+    ViewData["Title"] = "Upcoming Events";
+}
+
+<div class="container py-5">
+    <h2 class="fw-bold mb-2">Upcoming Events</h2>
+    <p class="text-muted mb-4">Explore upcoming RaceDay events and find your next challenge.</p>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">@ViewBag.Error</div>
+    }
+
+    <div class="row mb-4">
+        <div class="col-md-6 mb-3">
+            <label for="eventTypeFilter" class="form-label fw-bold">Filter by Event Type</label>
+            <select id="eventTypeFilter" class="form-select">
+                <option value="">All Event Types</option>
+                <option value="Running">Running</option>
+                <option value="Walking">Walking</option>
+                <option value="Cycling">Cycling</option>
+            </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label for="locationFilter" class="form-label fw-bold">Search by Location</label>
+            <input type="text"
+                   id="locationFilter"
+                   class="form-control"
+                   placeholder="Enter a location..." />
+        </div>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="row" id="eventList">
+            @foreach (var eventItem in Model)
+            {
+                <div class="col-md-6 col-lg-4 mb-4 event-card"
+                     data-type="@eventItem.EventType"
+                     data-location="@eventItem.Location">
+
+                    <div class="card h-100 shadow-sm border-0">
+                        @if (!string.IsNullOrEmpty(eventItem.BannerImageUrl))
+                        {
+                            <img src="@eventItem.BannerImageUrl"
+                                 class="card-img-top"
+                                 style="height:200px; object-fit:cover;"
+                                 alt="Event banner" />
+                        }
+
+                        <div class="card-body">
+                            <h5 class="fw-bold">@eventItem.Name</h5>
+                            <p class="text-muted">@eventItem.Description</p>
+
+                            <p><strong>Date:</strong> @eventItem.EventDate.ToString("dd MMM yyyy")</p>
+                            <p><strong>Location:</strong> @eventItem.Location</p>
+                            <p><strong>Distance:</strong> @eventItem.Distance km</p>
+                            <p><strong>Type:</strong> @eventItem.EventType</p>
+
+                            <a asp-action="EventDetails"
+                               asp-route-id="@eventItem.EventID"
+                               class="btn btn-warning fw-bold">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div id="noMatchingEvents" class="alert alert-info" style="display:none;">
+            No events match your filters.
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            There are currently no upcoming events.
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        const typeFilter = document.getElementById("eventTypeFilter");
+        const locationFilter = document.getElementById("locationFilter");
+
+        function filterEvents() {
+            const selectedType = typeFilter.value.toLowerCase();
+            const searchLocation = locationFilter.value.toLowerCase();
+
+            const cards = document.querySelectorAll(".event-card");
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const eventType = card.dataset.type.toLowerCase();
+                const eventLocation = card.dataset.location.toLowerCase();
+
+                const matchesType = !selectedType || eventType === selectedType;
+                const matchesLocation = eventLocation.includes(searchLocation);
+
+                if (matchesType && matchesLocation) {
+                    card.style.display = "";
+                    visibleCount++;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            const noResults = document.getElementById("noMatchingEvents");
+
+            if (noResults) {
+                noResults.style.display = visibleCount === 0 ? "block" : "none";
+            }
+        }
+
+        typeFilter.addEventListener("change", filterEvents);
+        locationFilter.addEventListener("input", filterEvents);
+    </script>
+}

@@ -1,0 +1,96 @@
+﻿@model List<RaceDayMVC.Models.OrganizerEnrollmentViewModel>
+
+@{
+    ViewData["Title"] = "Manage Enrolments";
+}
+
+<div class="container py-5">
+
+    <div class="mb-4">
+        <h2 class="fw-bold">Manage Enrolments</h2>
+        <p class="text-muted">
+            View participants enrolled in your RaceDay events.
+        </p>
+    </div>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="card border-0 shadow-sm rounded-4">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Participant</th>
+                            <th>Email</th>
+                            <th>Event</th>
+                            <th>Category</th>
+                            <th>Enrolment Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var enrollment in Model)
+                        {
+                            <tr>
+                                <td class="fw-semibold">
+                                    @enrollment.ParticipantName
+                                </td>
+
+                                <td>@enrollment.ParticipantEmail</td>
+
+                                <td>@enrollment.EventName</td>
+
+                                <td>@enrollment.CategoryName</td>
+
+                                <td>
+                                    @enrollment.EnrollmentDate.ToString("dd MMM yyyy")
+                                </td>
+
+                                <td>
+                                    @if (enrollment.Status == "CONFIRMED")
+                                    {
+                                        <span class="badge bg-success">
+                                            CONFIRMED
+                                        </span>
+                                    }
+                                    else if (enrollment.Status == "CANCELLED")
+                                    {
+                                        <span class="badge bg-danger">
+                                            CANCELLED
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning text-dark">
+                                            @enrollment.Status
+                                        </span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card border-0 shadow-sm rounded-4 text-center p-5">
+            <h5>No enrolments yet</h5>
+            <p class="text-muted mb-0">
+                Participants who enrol in your events will appear here.
+            </p>
+        </div>
+    }
+
+</div>

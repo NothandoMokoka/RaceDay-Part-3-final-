@@ -1,0 +1,79 @@
+﻿@model RaceDayMVC.Models.RecordResultViewModel
+
+@{
+    ViewData["Title"] = "Record Result";
+}
+
+<div class="container py-5">
+
+    <div class="card shadow-sm border-0 mx-auto" style="max-width: 650px;">
+        <div class="card-body p-4">
+
+            <h2 class="fw-bold mb-2">Record Result</h2>
+            <p class="text-muted mb-4">
+                Enter the participant's finishing position and time.
+            </p>
+
+            <form asp-action="RecordResult" method="post">
+
+                <div asp-validation-summary="All"
+                     class="text-danger mb-3"></div>
+
+                <div class="mb-3">
+                    <label asp-for="EnrollmentID" class="form-label">
+                        Participant Enrolment
+                    </label>
+
+                    <select asp-for="EnrollmentID"
+                            asp-items="ViewBag.Enrollments"
+                            class="form-select">
+                        <option value="">Select an enrolment</option>
+                    </select>
+
+                    <span asp-validation-for="EnrollmentID"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="FinishPosition" class="form-label">
+                        Finishing Position
+                    </label>
+
+                    <input asp-for="FinishPosition"
+                           type="number"
+                           min="1"
+                           class="form-control" />
+
+                    <span asp-validation-for="FinishPosition"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="FinishTime" class="form-label">
+                        Finish Time
+                    </label>
+
+                    <input asp-for="FinishTime"
+                           type="time"
+                           step="1"
+                           class="form-control" />
+
+                    <span asp-validation-for="FinishTime"
+                          class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-warning fw-bold">
+                    Save Result
+                </button>
+
+                <a asp-action="Results"
+                   class="btn btn-secondary">
+                    Cancel
+                </a>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>

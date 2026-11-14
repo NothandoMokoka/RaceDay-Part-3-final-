@@ -1,0 +1,50 @@
+﻿@model List<RaceDayMVC.Models.ParticipantResultViewModel>
+
+@{
+    ViewData["Title"] = "My Results";
+}
+
+<div class="container py-5">
+    <h2 class="fw-bold mb-2">My Results</h2>
+    <p class="text-muted mb-4">View your race performance and finishing positions.</p>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">@ViewBag.Error</div>
+    }
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Event</th>
+                        <th>Event Date</th>
+                        <th>Category</th>
+                        <th>Finish Position</th>
+                        <th>Finish Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var result in Model)
+                    {
+                        <tr>
+                            <td>@result.EventName</td>
+                            <td>@result.EventDate.ToString("dd MMM yyyy")</td>
+                            <td>@result.CategoryName</td>
+                            <td>@result.FinishPosition</td>
+                            <td>@result.FinishTime</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            You do not have any recorded results yet.
+        </div>
+    }
+</div>

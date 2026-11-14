@@ -1,8 +1,106 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container-fluid p-0">
+
+    <section class="text-white text-center py-5"
+             style="background: linear-gradient(135deg, #101d35, #234b75);">
+
+        <div class="container py-5">
+
+            <h1 class="display-3 fw-bold">
+                WELCOME TO <span class="text-warning">RACEDAY</span>
+            </h1>
+
+            <p class="lead mt-3">
+                Your race. Your challenge. Your achievement.
+            </p>
+
+            <p class="mb-4">
+                Discover exciting sporting events, compete with others
+                and track your performance.
+            </p>
+
+            @if (Context.Session.GetInt32("UserID") == null)
+            {
+                <a asp-controller="Auth"
+                   asp-action="Register"
+                   class="btn btn-warning btn-lg fw-bold me-2">
+                    Get Started
+                </a>
+
+                <a asp-controller="Auth"
+                   asp-action="Login"
+                   class="btn btn-outline-light btn-lg">
+                    Sign In
+                </a>
+            }
+            else if (Context.Session.GetString("RoleName") == "Organizer")
+            {
+                <a asp-controller="Organizer"
+                   asp-action="Index"
+                   class="btn btn-warning btn-lg fw-bold">
+                    Go to Dashboard
+                </a>
+            }
+            else
+            {
+                <a asp-controller="Participant"
+                   asp-action="Index"
+                   class="btn btn-warning btn-lg fw-bold">
+                    Explore Events
+                </a>
+            }
+
+        </div>
+    </section>
+
+    <section class="container py-5">
+
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">DISCOVER RACEDAY</h2>
+            <p class="text-muted">
+                Everything you need for your sporting journey.
+            </p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <div class="card border-0 shadow h-100 text-center p-4">
+                    <div class="display-4 mb-3">🏃</div>
+                    <h4 class="fw-bold">Explore Events</h4>
+                    <p class="text-muted">
+                        Discover running, walking and cycling events
+                        available on the platform.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card border-0 shadow h-100 text-center p-4">
+                    <div class="display-4 mb-3">🏆</div>
+                    <h4 class="fw-bold">Compete</h4>
+                    <p class="text-muted">
+                        Enrol in events, select your category
+                        and challenge yourself.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card border-0 shadow h-100 text-center p-4">
+                    <div class="display-4 mb-3">📊</div>
+                    <h4 class="fw-bold">Track Results</h4>
+                    <p class="text-muted">
+                        View your event history, finishing times
+                        and positions.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
 </div>
