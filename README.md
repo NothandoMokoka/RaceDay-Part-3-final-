@@ -89,7 +89,3 @@ The application uses Microsoft SQL Server to store information relating to:
 * Event categories.
 * Participant enrolments.
 * Race results.
-
-Author
-
-Developed as part of the IIE Rosebank College Diploma in Information Technology (Software Development), PROG6212 Programming Project – Part 3.
