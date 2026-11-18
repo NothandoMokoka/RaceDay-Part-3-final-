@@ -97,7 +97,7 @@ namespace RaceDayMVC.Controllers
                 return RedirectToAction("Index");
             }
         }
-
+// Allows participants to enrol in an event.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Enroll(int eventId, int categoryId)
