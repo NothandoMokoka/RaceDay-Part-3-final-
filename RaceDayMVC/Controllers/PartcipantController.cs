@@ -296,7 +296,7 @@ namespace RaceDayMVC.Controllers
                 return View(new ParticipantProfileViewModel());
             }
         }
-
+// Updates the participant's profile information.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Profile(ParticipantProfileViewModel model)
