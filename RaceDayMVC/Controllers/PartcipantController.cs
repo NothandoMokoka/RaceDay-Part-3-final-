@@ -187,7 +187,7 @@ namespace RaceDayMVC.Controllers
                 return View(new List<ParticipantEnrollmentViewModel>());
             }
         }
-
+// Displays the results for the logged-in participant.
         public async Task<IActionResult> MyResults()
         {
             if (HttpContext.Session.GetString("RoleName") != "Participant")
