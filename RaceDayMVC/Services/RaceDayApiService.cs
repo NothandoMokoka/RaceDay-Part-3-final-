@@ -28,7 +28,7 @@ namespace RaceDayMVC.Services
 
             _httpClient.BaseAddress = new Uri(apiBaseUrl);
         }
-
+// Retrieves data from the RaceDay API.
         public async Task<HttpResponseMessage> GetAsync(string endpoint)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, endpoint);
