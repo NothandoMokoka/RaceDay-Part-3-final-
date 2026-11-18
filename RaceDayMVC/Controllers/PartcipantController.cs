@@ -124,6 +124,7 @@ namespace RaceDayMVC.Controllers
             return RedirectToAction("EventDetails", new { id = eventId });
         }
 
+// Retrieves upcoming events for participants.
         public async Task<IActionResult> MyEvents()
         {
             if (HttpContext.Session.GetString("RoleName") != "Participant")
