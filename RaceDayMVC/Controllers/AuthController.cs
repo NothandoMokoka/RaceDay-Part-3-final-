@@ -80,7 +80,7 @@ namespace RaceDayMVC.Controllers
             ViewBag.Error = "Your account has an invalid role.";
             return View(model);
         }
-
+// Registers a new user account.
         [HttpGet]
         public IActionResult Register()
         {
