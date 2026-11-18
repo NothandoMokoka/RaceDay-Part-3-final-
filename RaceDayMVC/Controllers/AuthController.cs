@@ -86,7 +86,7 @@ namespace RaceDayMVC.Controllers
         {
             return View();
         }
-
+// Handles user login and redirects users based on their roles.
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
