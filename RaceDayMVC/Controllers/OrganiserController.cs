@@ -76,7 +76,7 @@ namespace RaceDayMVC.Controllers
 
             return View();
         }
-
+// Creates a new sporting event.
         [HttpGet]
         public IActionResult CreateEvent()
         {
