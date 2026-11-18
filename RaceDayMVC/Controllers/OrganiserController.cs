@@ -15,6 +15,7 @@ namespace RaceDayMVC.Controllers
             _apiService = apiService;
         }
 
+       // Displays the organizer dashboard. 
         public async Task<IActionResult> Index()
         {
             if (!IsOrganizer())
