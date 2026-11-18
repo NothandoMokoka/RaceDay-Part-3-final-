@@ -1125,6 +1125,7 @@ namespace RaceDayMVC.Controllers
 
             return View(new RecordResultViewModel());
         }
+        // Manages categories for sporting events.
 
         [HttpPost]
         [ValidateAntiForgeryToken]
