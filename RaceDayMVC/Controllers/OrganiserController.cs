@@ -350,6 +350,7 @@ namespace RaceDayMVC.Controllers
                 return View(new List<OrganizerEventViewModel>());
             }
         }
+        // Deletes an existing sporting event.
         [HttpGet]
         public async Task<IActionResult> DeleteEvent(int id)
         {
