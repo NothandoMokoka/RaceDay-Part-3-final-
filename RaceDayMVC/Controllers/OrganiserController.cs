@@ -187,6 +187,7 @@ namespace RaceDayMVC.Controllers
                 return View(model);
             }
         }
+        // Updates an existing sporting event.
         [HttpGet]
         public async Task<IActionResult> EditEvent(int id)
         {
